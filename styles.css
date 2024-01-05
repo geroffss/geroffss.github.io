@@ -1,0 +1,24 @@
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+#hours {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.unselectable {
+    background-color: rgb(125, 17, 17);
+    cursor: default;
+}
+
+.dark {
+    background-color: #333;
+    color: #fff;
+}
+.hidden {
+    display: none;
+}

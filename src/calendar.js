@@ -24,19 +24,12 @@ document.getElementById('appointment-form').addEventListener('submit', function(
     event.target.reset();
 });
 
-window.onload = function() {
+function updateHours() {
     var select = document.getElementById("hour");
-    for(var i = 7; i <= 18; i++) {
-        var option = document.createElement("option");
-        var hour = i < 10 ? "0" + i : i; // Add leading zero to single digit hours
-        hour += ":00"; // Append ":00" to the hour
-        option.value = hour;
-        option.text = hour;
-        select.appendChild(option);
-    }
-}
-window.onload = function() {
-    var select = document.getElementById("hour");
+    select.innerHTML = ""; // Clear the select element
+
+    var selectedTag = document.getElementById('tag').value;
+    var selectedDate = document.getElementById('date').value;
 
     // Fetch appointments from Firebase
     firebase.database().ref('appointments').once('value', function(snapshot) {
@@ -45,11 +38,14 @@ window.onload = function() {
         // Create an array of booked hours
         var bookedHours = [];
         for(var key in appointments) {
-            bookedHours.push(appointments[key].time);
+            var appointment = appointments[key];
+            if (appointment.date === selectedDate && appointment.tag === selectedTag) {
+                bookedHours.push(appointment.time);
+            }
         }
 
         // Create options for each hour
-        for(var i = 7; i <= 18; i++) {
+        for(var i = 7; i <= 17; i++) {
             var option = document.createElement("option");
             var hour = i < 10 ? "0" + i : i; // Add leading zero to single digit hours
             hour += ":00"; // Append ":00" to the hour
@@ -64,4 +60,10 @@ window.onload = function() {
             select.appendChild(option);
         }
     });
+}
+
+window.onload = function() {
+    // Add event listeners to the date and tag elements
+    document.getElementById('date').addEventListener('change', updateHours);
+    document.getElementById('tag').addEventListener('change', updateHours);
 }
