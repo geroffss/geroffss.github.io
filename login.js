@@ -16,7 +16,7 @@ document.querySelector('#loginSection form').addEventListener('submit', function
         .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
-            window.location.href = 'dashboard.html';
+            window.location.href = 'dashboardnew.html';
         })
         .catch((error) => {
             var errorCode = error.code;
