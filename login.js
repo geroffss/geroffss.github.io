@@ -14,14 +14,10 @@ document.querySelector('#loginSection form').addEventListener('submit', function
     var password = e.target.password.value;
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
             window.location.href = 'dashboardnew.html';
         })
         .catch((error) => {
-            var errorCode = error.code;
             var errorMessage = error.message;
-            // Display an error message to the user
             alert('Error: ' + errorMessage);
         });
 });
@@ -32,14 +28,10 @@ document.querySelector('#registerSection form').addEventListener('submit', funct
     var password = e.target.password.value;
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
             window.location.href = 'dashboard.html';
         })
         .catch((error) => {
-            var errorCode = error.code;
             var errorMessage = error.message;
-            // Display an error message to the user
             alert('Error: ' + errorMessage);
         });
 });
